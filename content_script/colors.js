@@ -36,10 +36,37 @@ function addColorToBody(color) {
             elements[i].style.backgroundColor = pink;
         }
 }*/
+// function notify(request, sender, sendResponse) {
+    // console.log("merge?");
+    // $("body").style.color = request.coloring[0];
+// }
 
 function modify(request, sender, sendResponse) {
-    addColorToBody(request.color);
-    addClassToElement(request.toModify);
+    if(request.color) {
+        console.log("a venit mesajul");
+        addColorToBody(request.color);
+    }
+    else if(request.coloring) {
+        console.log("merge?");
+        $("body").style.color = request.coloring[0];
+    }
+    //addClassToElement(request.toModify);
+
+    //console.log(result.color[0]);
+    //primire info
+
+    const inputElement = $('<input> </input>');
+    const parent = $('body');
+    inputElement.addClass('newInput');
+    parent.appendChild(inputElement);
+    var newInput = $('.newInput');
+    newInput.value().onchange = function() {
+        browser.runtime.sendMessage({'input' : newInput.value()}).then(sendMessage);
+    }
 }
 
+//jquery: input de adaugat in pagina
+//on change pt input send message
+//mesajul ajunge in background
+// browser.runtime.onMessage.addListener(notify);
 browser.runtime.onMessage.addListener(modify);

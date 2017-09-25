@@ -39,7 +39,7 @@ function partyModeActivator(mode) {
     }
 }
 
-var optionsList = document.querySelectorAll(".party");
+var optionsList = $(".party");
 console.log(optionsList);
 
 for (let i = 0; i < optionsList.length; i++) {
@@ -52,13 +52,11 @@ for (let i = 0; i < optionsList.length; i++) {
         var mode = e.target.textContent;
         var chooseModeObject = partyModeActivator(mode);
 
-        browser.tabs.executeScript(null, {
-            file: "/content_scripts/colors.js"
-          });
-
-        // browser.tabs.insertCSS({
-        //     file: "/content_script/colors.css"
-        // });
+        //request
+        $.ajax({url: "info.txt", success: function(result){
+            //send message to content script  with info
+            browser.runtime.sendMessage({coloring: result.color});
+        }});
         
         var gettingActiveTab = browser.tabs.query({active: true, currentWindow: true});
         gettingActiveTab.then((tabs) => {
