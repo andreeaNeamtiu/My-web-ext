@@ -3,7 +3,6 @@ function partyModeActivator(mode) {
     var desiredClassName;
     var color;
     var toModify;
-    console.log('mode=',mode);
 
     switch (mode) {
         case "Party Mode 1": {
@@ -40,28 +39,28 @@ function partyModeActivator(mode) {
 }
 
 var optionsList = $(".party");
-console.log(optionsList);
 
 for (let i = 0; i < optionsList.length; i++) {
     let option = optionsList[i];
-    console.log(typeof option);
-
+   
     option.addEventListener('click', function(e) {
 
-        console.log(e.target.className);
         var mode = e.target.textContent;
         var chooseModeObject = partyModeActivator(mode);
 
-        //request
-        $.ajax({url: "info.txt", success: function(result){
-            //send message to content script  with info
-            browser.runtime.sendMessage({coloring: result.color});
-        }});
-        
+        //if the button pressed has change class send request for creating the input
+        if (e.target.className == "party change") {
+            const elem = "abc";
+            var gettingActiveTab = browser.tabs.query({active: true, currentWindow: true});
+            gettingActiveTab.then((tabs) => {
+                browser.tabs.sendMessage(tabs[0].id, {create: ''});
+        });
+        }
+
         var gettingActiveTab = browser.tabs.query({active: true, currentWindow: true});
         gettingActiveTab.then((tabs) => {
             browser.tabs.sendMessage(tabs[0].id, {color: chooseModeObject.color, desiredClassName: chooseModeObject.desiredClassName, toModify: chooseModeObject.toModify});
         });
+        
     });
-
 }

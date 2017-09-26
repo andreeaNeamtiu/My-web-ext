@@ -1,0 +1,8 @@
+{
+   "color":[
+      "red",
+      "pink",
+      "blue",
+      "green"
+   ]
+}
