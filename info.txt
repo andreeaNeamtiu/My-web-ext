@@ -1,8 +1,13 @@
 {
-   "color":[
-      "red",
-      "pink",
-      "blue",
-      "green"
-   ]
+    "color":[
+        "red",
+        "pink",
+        "blue",
+        "green",
+        "AliceBlue",
+        "Aquamarine",
+        "CornflowerBlue",
+        "black",
+        "white",
+        "yellow"]
 }

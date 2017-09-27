@@ -41,8 +41,8 @@ function partyModeActivator(mode) {
 var optionsList = $(".party");
 
 for (let i = 0; i < optionsList.length; i++) {
+
     let option = optionsList[i];
-   
     option.addEventListener('click', function(e) {
 
         var mode = e.target.textContent;
@@ -53,8 +53,8 @@ for (let i = 0; i < optionsList.length; i++) {
             const elem = "abc";
             var gettingActiveTab = browser.tabs.query({active: true, currentWindow: true});
             gettingActiveTab.then((tabs) => {
-                browser.tabs.sendMessage(tabs[0].id, {create: ''});
-        });
+                browser.tabs.sendMessage(tabs[0].id, {create: elem});
+            });
         }
 
         var gettingActiveTab = browser.tabs.query({active: true, currentWindow: true});
