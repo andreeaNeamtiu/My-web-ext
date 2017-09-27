@@ -6,7 +6,8 @@
     
       "permissions": [
         "activeTab",
-        "<all_urls>"
+        "<all_urls>",
+        "tabs"
       ],
     
       "browser_action": {
@@ -18,9 +19,13 @@
       "content_scripts": [
         {
           "matches": ["<all_urls>"],
-          "js": ["../jquery.min.js","content_script/colors.js"],
+          "js": ["jquery.min.js","content_script/colors.js"],
           "css": ["content_script/colors.css"],
-          "run": ["document_end"]
+          "run_at": "document_end"
         }
-      ]
+      ],
+
+      "background": {
+        "scripts": ["background/background.js","jquery.min.js"]
+         }
     }
